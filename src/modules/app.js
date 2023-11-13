@@ -45,7 +45,7 @@ const validate = (url, watchedState) => {
       .url('invalidUrl')
       .notOneOf(
         watchedState.data.feeds.map((feed) => feed.url),
-        'alreadyExists'
+        'alreadyExists',
       )
       .required('emptyField'),
   });
@@ -68,8 +68,8 @@ const updateRSS = (watchedState) => {
     });
     const urls = data.feeds.map((feed) => feed.url);
     const feedPromises = urls.map((url) => (axios
-        .get(proxify(url))
-        .catch((err) => console.log('axiosError', err.message))
+      .get(proxify(url))
+      .catch((err) => console.log('axiosError', err.message))
     ));
     const promiseAll = Promise.all(feedPromises);
     promiseAll.then((responses) => {
