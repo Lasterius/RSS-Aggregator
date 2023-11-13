@@ -47,6 +47,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
+                // eslint-disable-next-line
                 plugins: [require('postcss-preset-env')],
               },
             },

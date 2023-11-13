@@ -93,12 +93,12 @@ const renderPosts = (state, i18n, elements) => {
     postContainer.classList.add(
       'list-group-item',
       'd-flex',
-      'justify-content-between'
+      'justify-content-between',
     );
     postContainer.classList.add(
       'align-items-start',
       'border-0',
-      'border-end-0'
+      'border-end-0',
     );
     const postDescription = document.createElement('a');
     postDescription.setAttribute('href', link);
