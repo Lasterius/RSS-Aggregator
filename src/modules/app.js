@@ -45,7 +45,7 @@ const validate = (url, watchedState) => {
       .url('invalidUrl')
       .notOneOf(
         watchedState.data.feeds.map((feed) => feed.url),
-        'alreadyExists'
+        'alreadyExists',
       )
       .required('emptyField'),
   });
@@ -67,11 +67,9 @@ const updateRSS = (watchedState) => {
       return { title, link, description };
     });
     const urls = data.feeds.map((feed) => feed.url);
-    const feedPromises = urls.map((url) =>
-      axios
-        .get(proxify(url))
-        .catch((err) => console.log('axiosError', err.message))
-    );
+    const feedPromises = urls.map((url) => axios
+      .get(proxify(url))
+      .catch((err) => console.log('axiosError', err.message)));
     const promiseAll = Promise.all(feedPromises);
     promiseAll.then((responses) => {
       responses.forEach((response, index) => {
@@ -115,8 +113,7 @@ const handleSubmitButtonEvent = (watchedState, elements) => {
     })
     .catch((err) => {
       formState.status = 'invalid';
-      const currentError =
-        err.name === 'AxiosError' ? 'badNetwork' : err.message;
+      const currentError = err.name === 'AxiosError' ? 'badNetwork' : err.message;
       dataLoadState.error = currentError;
       dataLoadState.status = 'failed';
       dataLoadState.status = 'filling';
